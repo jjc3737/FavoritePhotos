@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Photos View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PhotosViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,8 +16,68 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search Instagram" translatesAutoresizingMaskIntoConstraints="NO" id="Svt-EJ-121">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="WyB-DH-P2m"/>
+                                </connections>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oz9-nF-c9v">
+                                <rect key="frame" x="0.0" y="72" width="600" height="528"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="esk-Ph-aM8">
+                                    <size key="itemSize" width="600" height="304"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="5kH-mG-cer" customClass="ImageCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="304"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mdm-xh-RNt">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="304"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="mdm-xh-RNt" secondAttribute="bottom" id="Fl5-uT-myc"/>
+                                            <constraint firstItem="mdm-xh-RNt" firstAttribute="leading" secondItem="5kH-mG-cer" secondAttribute="leading" id="lJA-1i-4yT"/>
+                                            <constraint firstItem="mdm-xh-RNt" firstAttribute="top" secondItem="5kH-mG-cer" secondAttribute="top" id="ptx-0m-c1h"/>
+                                            <constraint firstAttribute="trailing" secondItem="mdm-xh-RNt" secondAttribute="trailing" id="rVM-27-TQT"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="cellImageView" destination="mdm-xh-RNt" id="HCD-DR-4iy"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="woh-4y-QKh"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="0cT-PY-fMQ"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Oz9-nF-c9v" secondAttribute="trailing" id="9yX-L4-Q0b"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Svt-EJ-121" secondAttribute="trailing" constant="-16" id="IhC-Ke-1hO"/>
+                            <constraint firstItem="Oz9-nF-c9v" firstAttribute="top" secondItem="Svt-EJ-121" secondAttribute="bottom" id="S3A-3D-WXV"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Oz9-nF-c9v" secondAttribute="bottom" id="XYR-lA-vhG"/>
+                            <constraint firstItem="Svt-EJ-121" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Xxl-TK-JQF"/>
+                            <constraint firstItem="Oz9-nF-c9v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fuR-rT-dp8"/>
+                            <constraint firstItem="Svt-EJ-121" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="leW-8P-K8r"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Oz9-nF-c9v" id="WwY-Cz-x5O"/>
+                        <outlet property="searchBar" destination="Svt-EJ-121" id="rjn-Dz-WmH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
