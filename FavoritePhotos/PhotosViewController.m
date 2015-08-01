@@ -14,7 +14,7 @@
 @interface PhotosViewController () 
 
 
-@property Model *model;
+
 @property Favorites *favorites;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSMutableArray *images;

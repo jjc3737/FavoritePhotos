@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "Model.h"
 
 @interface AppDelegate ()
+
+@property Model *model;
 
 @end
 
@@ -16,7 +19,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.model = [[Model alloc]init];
+
+    UITabBarController *tabController = (UITabBarController *) self.window.rootViewController;
+    UINavigationController *firstController = [tabController.viewControllers objectAtIndex:0];
+    
+    [firstController.topViewController setValue:self.model forKey:@"model"];
+    self.model.delegate = (id<ModelDelegate>)firstController.topViewController;
+    tabController.delegate = self;
     return YES;
 }
 
@@ -40,6 +50,16 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+#pragma mark - TabBarController Delegate
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
+    UINavigationController *navigationController = (UINavigationController *)viewController;
+    [navigationController.topViewController setValue:self.model forKey:@"model"];
+    self.model.delegate = (id<ModelDelegate>)navigationController.topViewController;
+    
 }
 
 @end

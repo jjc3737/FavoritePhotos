@@ -13,5 +13,6 @@
 
 @interface PhotosViewController : UIViewController <ModelDelegate, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ImageCollectionViewCellDelegate>
 
+@property Model *model;
 
 @end
