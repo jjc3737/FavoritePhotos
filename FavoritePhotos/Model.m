@@ -7,6 +7,7 @@
 //
 
 #import "Model.h"
+#import "Image.h"
 
 @implementation Model 
 
@@ -27,24 +28,34 @@
 
 -(void)makeImagesWithArray: (NSArray *)dataArray {
 
-    NSMutableArray *imageURLS = [NSMutableArray new];
+    NSMutableArray *images = [NSMutableArray new];
     int i = 0;
     
     for (NSDictionary *dataDictionaries in dataArray) {
         if (i == 10) {
             break;
         }
+        Image *starImage = [Image new];
+        starImage.isFavorited = NO;
+        starImage.idNumber = dataDictionaries[@"id"];
         NSDictionary *imageDictionary = dataDictionaries[@"images"];
         NSDictionary *standardResolution = imageDictionary[@"low_resolution"];
-        [imageURLS  addObject:standardResolution[@"url"]];
+        NSURL *url = [NSURL URLWithString:standardResolution[@"url"]];
+        starImage.photo = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        [images  addObject:starImage];
         i++;
         
     }
     
 
     
-    [self.delegate Model:self imageURLS:imageURLS];
+    [self.delegate Model:self images:images];
+    
+    
     
 }
+
+
+
 
 @end

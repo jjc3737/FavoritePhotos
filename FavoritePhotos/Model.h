@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol ModelDelegate;
 
@@ -23,7 +24,7 @@
 
 @protocol ModelDelegate <NSObject>
 
--(void)Model:(Model *)model imageURLS:(NSMutableArray *)imageURLS;
+-(void)Model:(Model *)model images:(NSMutableArray *)images;
 
 
 @end

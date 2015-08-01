@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Model.h"
+#import "ImageCollectionViewCell.h"
 
-@interface PhotosViewController : UIViewController <ModelDelegate, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface PhotosViewController : UIViewController <ModelDelegate, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ImageCollectionViewCellDelegate>
 
 
 @end
