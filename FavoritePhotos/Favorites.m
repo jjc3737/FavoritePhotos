@@ -19,24 +19,39 @@
 
 #pragma mark - Constants and Parameters 
 
-NSString *const directoryPath = @"favoritedImageJPEGs";
 NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
 
--(void) saveWithImages:(NSMutableArray *)images {
-
+-(void) saveWithImages:(Image *)image {
+    
     self.idNumbers = [[NSArray arrayWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
-
-    for (Image *image in images) {
-        if (![self.idNumbers containsObject:image.idNumber]) {
-            [self.idNumbers addObject:image.idNumber];
+    
+    if (![self.idNumbers containsObject:image.idNumber]) {
+        [self.idNumbers addObject:image.idNumber];
             //this writes to the directoryPath the images in separate files
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            [UIImageJPEGRepresentation(image.photo, 1.0) writeToFile:[[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", image.idNumber, @"jpg"]] options:NSAtomicWrite error:nil];
-              // this saves the ids of the images, and images are named idNumber.jpg so it is easy to find.
-            [self.idNumbers writeToURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]  atomically:YES];
+        [UIImageJPEGRepresentation(image.photo, 1.0) writeToFile:[self stringPathForImageFile:image.idNumber] options:NSAtomicWrite error:nil];
+            // this saves the ids of the images, and images are named idNumber.jpg so it is easy to find.
+        [self.idNumbers writeToURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]  atomically:YES];
         }
-    }
+    
 }
+
+//have another function where you saveWithDeletingImages: (Image *)image {
+
+
+//-(void) saveWithImages:(NSMutableArray *)images {
+//
+//    self.idNumbers = [[NSArray arrayWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
+//
+//    for (Image *image in images) {
+//        if (![self.idNumbers containsObject:image.idNumber]) {
+//            [self.idNumbers addObject:image.idNumber];
+//            //this writes to the directoryPath the images in separate files
+//            [UIImageJPEGRepresentation(image.photo, 1.0) writeToFile:[self stringPathForImageFile:image.idNumber] options:NSAtomicWrite error:nil];
+//              // this saves the ids of the images, and images are named idNumber.jpg so it is easy to find.
+//            [self.idNumbers writeToURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]  atomically:YES];
+//        }
+//    }
+//}
 
 -(NSMutableArray *)loadImageObjects{
     NSMutableArray *imageObjectArrays = [NSMutableArray new];
@@ -58,15 +73,21 @@ NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
 
 -(UIImage *) loadImage:(NSString *)fileName {
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 
-    UIImage * result = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@", [paths objectAtIndex:0], fileName, @"jpg"]];
+    UIImage * result = [UIImage imageWithContentsOfFile:[self stringPathForImageFile:fileName]];
 
     return result;
 }
+
+-(NSString *)stringPathForImageFile:(NSString *)imageName {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    return [paths.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"jpg"]];
+}
+
+
 @end
-
-
 
 
 
