@@ -16,5 +16,20 @@
     return  url;
 }
 
+//-(NSString *)pathInDocumentsDirectoryForImageName: (NSString *)imageName {
+//   
+//    
+//    
+//    NSSearchPathDirectory *path = [[NSFileManager defaultManager] pathInDocumentsDirectoryForImageName:[NSString stringWithFormat:@"%@.%@", imageName, @"jpg"]];
+//    
+//NSString *pathS = path string
+//
+//    
+//    return [[NSFileManager defaultManager] pathInDocumentsDirectoryForImageName:[NSString stringWithFormat:@"%@.%@", imageName, @"jpg"]];
+//    
+//    
+//}
+
+
 
 @end
