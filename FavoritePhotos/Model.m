@@ -38,9 +38,12 @@
         Image *starImage = [Image new];
         starImage.isFavorited = NO;
         starImage.idNumber = dataDictionaries[@"id"];
-        //NSDictionary *locationDictionary = dataDictionaries[@"location"];
-        //starImage.latititude = [locationDictionary[@"latitude"]doubleValue];
-        //starImage.longitude = [locationDictionary[@"longitude"]doubleValue];
+        if (!(dataDictionaries[@"location"] == (id)[NSNull null])) {
+            NSDictionary *locationDictionary = dataDictionaries[@"location"];
+            double latitude =  [locationDictionary[@"latitude"]doubleValue];
+            double longitude = [locationDictionary[@"longitude"]doubleValue];
+            starImage.latitudeAndLongitude = [NSArray arrayWithObjects:[NSNumber numberWithDouble:latitude ], [NSNumber numberWithDouble:longitude], nil];
+        }
 
         NSDictionary *imageDictionary = dataDictionaries[@"images"];
         NSDictionary *standardResolution = imageDictionary[@"low_resolution"];
@@ -53,6 +56,9 @@
 
     [self.delegate Model:self images:images];
 }
+
+
+
 
 
 
