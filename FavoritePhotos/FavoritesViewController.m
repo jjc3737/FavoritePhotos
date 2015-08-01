@@ -7,36 +7,39 @@
 //
 
 #import "FavoritesViewController.h"
+#import "Favorites.h"
+
+
 
 @interface FavoritesViewController ()
+
+
 @property NSMutableArray *kindOfLikedPhotos;
+@property Favorites *favorites;
 
 @end
 
+
+
 @implementation FavoritesViewController
+
+
+#pragma mark - VC and Life-cycle 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+    [self loadFromDirectory];
+}
+
+
+-(void)loadFromDirectory {
     self.kindOfLikedPhotos = [NSMutableArray new];
-    [self load];
-}
-
-#pragma mark - Save & Load
--(void) save {
-    
-    [self.kindOfLikedPhotos writeToURL:[self pListURL] atomically:YES];
-}
-
--(void) load {
-    
-    self.kindOfLikedPhotos = [NSMutableArray arrayWithContentsOfURL:[self pListURL]];
+    self.favorites = [Favorites new];
+    self.kindOfLikedPhotos = [self.favorites loadImageObjects];
     [self.collectionView reloadData];
 }
 
--(NSURL *)pListURL {
-    
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject URLByAppendingPathComponent:@"favoritePhotos.plist"];
-}
 
 #pragma mark - Collection View Delegate
 
@@ -55,9 +58,11 @@
     return cell;
 }
 
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.kindOfLikedPhotos.count;
 }
+
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(self.view.frame.size.width, self.view.frame.size.width);
@@ -67,17 +72,18 @@
 
 #pragma mark - ImageCollectionViewCell Delegate
 
--(void)deleteImageCollectionViewCell:(ImageCollectionViewCell *)imageCollectionViewCell {
+-(UIImage *)imageCollectionViewCell:(ImageCollectionViewCell *)imageCollectionViewCell {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:imageCollectionViewCell];
     Image *image = self.kindOfLikedPhotos[indexPath.item];
+    image.isFavorited = NO;
+    [self.kindOfLikedPhotos removeObject:image];
+    [self.collectionView reloadData];
+    [self.favorites saveWithImages:self.kindOfLikedPhotos];
     
-    if (image.isFavorited) {
-        image.isFavorited = NO;
-        
-        [self.kindOfLikedPhotos removeObject:image];
-        [self save];
-        
-        [self.collectionView reloadData];
-    }
+    return image.photo;
+    
 }
+
+
+
 @end

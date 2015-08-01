@@ -12,7 +12,6 @@
 - (IBAction)starButtonPressed:(UIButton *)sender {
     
     UIImage *image = [self.delegate imageCollectionViewCell:self];
-//    [self.delegate deleteImageCollectionViewCell:self];
     [sender setImage:image forState:UIControlStateNormal];
 }
 

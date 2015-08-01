@@ -101,8 +101,7 @@
 			children = (
 				3FF380731B6ACFD800BC95F3 /* AppDelegate.h */,
 				3FF380741B6ACFD800BC95F3 /* AppDelegate.m */,
-				3FF380ED1B6C49F400BC95F3 /* NSFileManager+Documents.h */,
-				3FF380EE1B6C49F400BC95F3 /* NSFileManager+Documents.m */,
+				3FF380F31B6C791B00BC95F3 /* Categories */,
 				3FF380EC1B6C323200BC95F3 /* ViewControllers */,
 				3FF3809F1B6AF0BD00BC95F3 /* View */,
 				3FF3809B1B6AF08F00BC95F3 /* Model */,
@@ -171,6 +170,15 @@
 				3FF380EA1B6C322500BC95F3 /* FavoritesViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3FF380F31B6C791B00BC95F3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				3FF380ED1B6C49F400BC95F3 /* NSFileManager+Documents.h */,
+				3FF380EE1B6C49F400BC95F3 /* NSFileManager+Documents.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -26,7 +26,6 @@
 
 @optional
 
--(void)deleteImageCollectionViewCell:(ImageCollectionViewCell *)imageCollectionViewCell;
 -(UIImage *)imageCollectionViewCell:(ImageCollectionViewCell *)imageCollectionViewCell;
 
 
