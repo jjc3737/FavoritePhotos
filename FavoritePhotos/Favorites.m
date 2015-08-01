@@ -25,14 +25,21 @@ NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
 -(void) saveWithImage:(Image *)image {
     
     
-    self.idNumbersToCoordinates = [[NSArray arrayWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
+    self.idNumbersToCoordinates = [[NSDictionary dictionaryWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
     
     if (self.idNumbersToCoordinates == nil) {
         self.idNumbersToCoordinates = [NSMutableDictionary new];
+        [self.idNumbersToCoordinates setObject:image.latitudeAndLongitude forKey:image.idNumber];
+        
+        //this writes to the directoryPath the images in separate files
+        [UIImageJPEGRepresentation(image.photo, 1.0) writeToFile:[self stringPathForImageFile:image.idNumber] options:NSAtomicWrite error:nil];
+        // this saves the ids of the images, and images are named idNumber.jpg so it is easy to find.
+        [self.idNumbersToCoordinates writeToURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]  atomically:YES];
     } else {
 
         
         [self.idNumbersToCoordinates setObject:image.latitudeAndLongitude forKey:image.idNumber];
+        
             //this writes to the directoryPath the images in separate files
         [UIImageJPEGRepresentation(image.photo, 1.0) writeToFile:[self stringPathForImageFile:image.idNumber] options:NSAtomicWrite error:nil];
             // this saves the ids of the images, and images are named idNumber.jpg so it is easy to find.
@@ -44,7 +51,7 @@ NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
 
 //have another function where you saveWithDeletingImages: (Image *)image {
 -(void)savedRemovedFavoriteImage:(Image *)image {
-    self.idNumbersToCoordinates = [[NSArray arrayWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
+    self.idNumbersToCoordinates = [[NSDictionary dictionaryWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
     
     [self.idNumbersToCoordinates removeObjectForKey:image.idNumber];
 
@@ -72,13 +79,14 @@ NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
 -(NSMutableArray *)loadImageObjects{
     NSMutableArray *imageObjectArrays = [NSMutableArray new];
     
-    NSArray *idNumbers = [NSArray arrayWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]];
+    NSMutableDictionary *idsToCoordinates = [[NSDictionary dictionaryWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
     
-    for (NSString *idNumber in idNumbers) {
+    for (NSString *idNumber in idsToCoordinates) {
         Image *image = [Image new];
         image.idNumber = idNumber;
         image.photo = [self loadImage:idNumber];
         image.isFavorited = YES;
+        image.latitudeAndLongitude = idsToCoordinates[idNumber];
         [imageObjectArrays addObject:image];
         
     }
