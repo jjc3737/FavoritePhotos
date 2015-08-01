@@ -21,7 +21,7 @@
 
 NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
 
--(void) saveWithImages:(Image *)image {
+-(void) saveWithImage:(Image *)image {
     
     self.idNumbers = [[NSArray arrayWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
     
@@ -36,6 +36,14 @@ NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
 }
 
 //have another function where you saveWithDeletingImages: (Image *)image {
+-(void)savedRemovedFavoriteImage:(Image *)image {
+    self.idNumbers = [[NSArray arrayWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
+
+    [self.idNumbers removeObject:image.idNumber];
+
+    [[NSFileManager defaultManager] removeItemAtPath:[self stringPathForImageFile:image.idNumber] error:nil];
+    [self.idNumbers writeToURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]  atomically:YES];
+}
 
 
 //-(void) saveWithImages:(NSMutableArray *)images {

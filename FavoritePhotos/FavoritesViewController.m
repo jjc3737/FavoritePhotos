@@ -77,7 +77,7 @@
     image.isFavorited = NO;
     [self.kindOfLikedPhotos removeObject:image];
     [self.collectionView reloadData];
-    [self.favorites saveWithImages:self.kindOfLikedPhotos];
+    [self.favorites saveWithImage:image];
     
     return image.photo;
     
