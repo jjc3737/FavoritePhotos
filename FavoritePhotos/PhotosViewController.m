@@ -132,12 +132,13 @@
 
 
 - (void)checkFavoritesArray {
-    Favorites *f = [Favorites new];
-    NSArray *favorites = [f loadImageObjects];
+    NSArray *favorites = [self.favorites loadImageObjects];
 
     for (Image *i in favorites) {
+        NSString *idFavorited = i.idNumber;
         for (int j = 0; j < self.images.count; j++) {
-            if ([self.images[j] isEqual:i]) {
+            NSString *idOfCurrentImage = [self.images[j] idNumber];
+            if ([idOfCurrentImage isEqualToString:idFavorited]) {
                 [self.images[j] setIsFavorited:YES];
             }
         }

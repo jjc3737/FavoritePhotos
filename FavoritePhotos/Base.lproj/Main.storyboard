@@ -30,7 +30,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L4o-EV-ooz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630" y="1687"/>
+            <point key="canvasLocation" x="1081" y="1822"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="YFd-1r-hkG">
@@ -136,8 +136,8 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="WyB-DH-P2m"/>
                                 </connections>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oz9-nF-c9v">
-                                <rect key="frame" x="0.0" y="72" width="600" height="528"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oz9-nF-c9v">
+                                <rect key="frame" x="0.0" y="72" width="600" height="479"/>
                                 <color key="backgroundColor" red="0.80808080810000005" green="0.80808080810000005" blue="0.80808080810000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="esk-Ph-aM8">
                                     <size key="itemSize" width="600" height="304"/>
