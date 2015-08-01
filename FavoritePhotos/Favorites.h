@@ -15,7 +15,8 @@
 @property NSMutableArray *savedFavoritedPhotos;
 
 
--(void) saveWithImages:(Image *)image;
+-(void) saveWithImage:(Image *)image;
+-(void) savedRemovedFavoriteImage:(Image *)image;
 
 -(NSMutableArray *)loadImageObjects;
 

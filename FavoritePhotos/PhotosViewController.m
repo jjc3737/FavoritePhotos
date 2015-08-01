@@ -17,7 +17,6 @@
 @property Model *model;
 @property Favorites *favorites;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSMutableArray *favoritedImages;
 @property NSMutableArray *images;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *starButton;
@@ -38,7 +37,6 @@
 
 -(void)initializeThings {
        self.favorites = [Favorites new];
-       self.favoritedImages = [NSMutableArray new];
 }
 
 
@@ -58,15 +56,13 @@
     
     if (image.isFavorited) {
         image.isFavorited = NO;
-        
-        [self.favoritedImages removeObject:image];
-        [self.favorites saveWithImages:self.favoritedImages];
 
+        [self.favorites savedRemovedFavoriteImage:image];
         return [UIImage imageNamed:@"star"];
     } else {
         image.isFavorited = YES;
-        [self.favoritedImages addObject:image];
-        [self.favorites saveWithImages:self.favoritedImages];
+
+        [self.favorites saveWithImage:image];
         return [UIImage imageNamed:@"star-filled"];
     }
 }
