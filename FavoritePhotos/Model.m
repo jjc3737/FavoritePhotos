@@ -44,6 +44,9 @@
             double longitude = [locationDictionary[@"longitude"]doubleValue];
             starImage.latitudeAndLongitude = [NSArray arrayWithObjects:[NSNumber numberWithDouble:latitude ], [NSNumber numberWithDouble:longitude], nil];
         }
+        else {
+            starImage.latitudeAndLongitude = [NSArray arrayWithObjects:[NSNumber numberWithDouble:0 ], [NSNumber numberWithDouble:0], nil];
+        }
 
         NSDictionary *imageDictionary = dataDictionaries[@"images"];
         NSDictionary *standardResolution = imageDictionary[@"low_resolution"];
