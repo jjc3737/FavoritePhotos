@@ -5,6 +5,33 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Map-->
+        <scene sceneID="DHv-d5-4rz">
+            <objects>
+                <viewController id="psm-eG-uud" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lQK-P1-zcE"/>
+                        <viewControllerLayoutGuide type="bottom" id="jAk-8I-yqu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x5h-sI-2Fn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kjo-BD-ez8">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="psm-eG-uud" id="nu6-Yz-JxW"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="Pzb-gE-AKz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L4o-EV-ooz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="630" y="1687"/>
+        </scene>
         <!--Favorites View Controller-->
         <scene sceneID="YFd-1r-hkG">
             <objects>
@@ -17,9 +44,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5X5-ui-CW2">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5X5-ui-CW2">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wed-WR-DjD">
+                                <color key="backgroundColor" red="0.80808080810000005" green="0.80808080810000005" blue="0.80808080810000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Wed-WR-DjD">
                                     <size key="itemSize" width="600" height="420"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -42,7 +70,7 @@
                                                         <constraint firstAttribute="height" constant="50" id="I5s-hI-xGa"/>
                                                         <constraint firstAttribute="width" constant="50" id="gYZ-OY-vBG"/>
                                                     </constraints>
-                                                    <state key="normal" image="star">
+                                                    <state key="normal" image="star-filled">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -198,6 +226,7 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="h1f-90-vHQ"/>
                         <segue destination="mxj-mT-Ir8" kind="relationship" relationship="viewControllers" id="cZH-NJ-tsd"/>
+                        <segue destination="psm-eG-uud" kind="relationship" relationship="viewControllers" id="T2Z-PD-Pfs"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhi-Jk-c2s" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -206,6 +235,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="map" width="25" height="25"/>
         <image name="star" width="100" height="100"/>
+        <image name="star-filled" width="100" height="100"/>
     </resources>
 </document>
