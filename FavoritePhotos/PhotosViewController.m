@@ -14,7 +14,7 @@
 @interface PhotosViewController () 
 
 
-@property Model *model;
+
 @property Favorites *favorites;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSMutableArray *images;
@@ -32,6 +32,12 @@
     [super viewDidLoad];
     [self initModelAndSetUpDefault];
     [self initializeThings];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self checkFavoritesArray];
+    [self.collectionView reloadData];
+    
 }
 
 
@@ -140,6 +146,8 @@
             NSString *idOfCurrentImage = [self.images[j] idNumber];
             if ([idOfCurrentImage isEqualToString:idFavorited]) {
                 [self.images[j] setIsFavorited:YES];
+            } else {
+                [self.images[j] setIsFavorited:NO];
             }
         }
     }

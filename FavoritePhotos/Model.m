@@ -43,6 +43,8 @@
             double latitude =  [locationDictionary[@"latitude"]doubleValue];
             double longitude = [locationDictionary[@"longitude"]doubleValue];
             starImage.latitudeAndLongitude = [NSArray arrayWithObjects:[NSNumber numberWithDouble:latitude ], [NSNumber numberWithDouble:longitude], nil];
+        } else {
+            starImage.latitudeAndLongitude = [NSArray arrayWithObjects:[NSNumber numberWithDouble:0 ], [NSNumber numberWithDouble:0], nil];
         }
         else {
             starImage.latitudeAndLongitude = [NSArray arrayWithObjects:[NSNumber numberWithDouble:0 ], [NSNumber numberWithDouble:0], nil];

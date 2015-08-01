@@ -12,6 +12,9 @@
 #import "ImageCollectionViewCell.h"
 
 @interface FavoritesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ImageCollectionViewCellDelegate>
+
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property Model *model;
+
 
 @end
