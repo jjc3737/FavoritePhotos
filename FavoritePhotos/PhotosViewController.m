@@ -7,28 +7,40 @@
 //
 
 #import "PhotosViewController.h"
-#import "ImageCollectionViewCell.h"
+#import "Image.h"
+#import "NSFileManager+Documents.h"
+#import "Favorites.h"
 
-@interface PhotosViewController ()
+@interface PhotosViewController () 
 
-@property NSMutableArray *imageURLS;
+
 @property Model *model;
+@property Favorites *favorites;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property NSMutableArray *favoritedImages;
 @property NSMutableArray *images;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIButton *starButton;
 
 @end
 
 @implementation PhotosViewController
 
+
+#pragma mark - VC and Life-cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
     [self initModelAndSetUpDefault];
-    
+    [self initializeThings];
 }
+
+
+-(void)initializeThings {
+    self.favorites = [Favorites new];
+       self.favoritedImages = [NSMutableArray new];
+}
+
 
 -(void)initModelAndSetUpDefault {
     self.model = [Model new];
@@ -36,31 +48,53 @@
     [self.model fetchDataWithParameter:@"San Francisco"];
 }
 
-#pragma mark - setUpImages
 
--(void)setUpImages {
+#pragma mark - CollectionViewCell Delegate
 
-    self.images = [[NSMutableArray alloc] init];
+-(UIImage *)imageCollectionViewCell:(ImageCollectionViewCell *)imageCollectionViewCell {
     
-    for (NSString *url in self.imageURLS) {
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
-        [self.images addObject:image];
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:imageCollectionViewCell];
+    Image *image = self.images[indexPath.item];
+    
+    if (image.isFavorited) {
+        image.isFavorited = NO;
+        
+        [self.favoritedImages removeObject:image];
+        [self.favorites saveWithImages:self.favoritedImages];
+
+        return [UIImage imageNamed:@"star"];
+    } else {
+        image.isFavorited = YES;
+        [self.favoritedImages addObject:image];
+        [self.favorites saveWithImages:self.favoritedImages];
+        return [UIImage imageNamed:@"star-filled"];
     }
-    
-    
 }
+
+
 
 #pragma mark - Collection View Delegate
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ImageCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.cellImageView.image = self.images[indexPath.item];
+    cell.delegate = self;
+    
+    Image *image = self.images [indexPath.item];
+    if (image.isFavorited) {
+        cell.starImageView.imageView.image = [UIImage imageNamed:@"star-filled"];
+    } else {
+        cell.starImageView.imageView.image = [UIImage imageNamed:@"star"];
+    }
+    cell.cellImageView.image = image.photo;
+    
     return cell;
 }
+
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.images.count; 
 }
+
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(self.view.frame.size.width, self.view.frame.size.width);
@@ -69,10 +103,13 @@
 
 #pragma mark - Model Delegate Method
 
--(void)Model:(Model *)model imageURLS:(NSMutableArray *)imageURLS {
-    self.imageURLS = [imageURLS copy];
+
+-(void)Model:(Model *)model images:(NSMutableArray *)images {
+    self.images = [images copy];
     
-    [self setUpImages];
+    
+    //THing to do here: load the image Object array from Favorites. Iterate through them and match with list of self.images and see if any of the images are in this list. IF SO, then that ImageObject.isFavorited = YES;
+    
     [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 
 }
@@ -81,11 +118,17 @@
 #pragma mark - searchBar Delegate 
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.searchBar resignFirstResponder];
     [self.model fetchDataWithParameter:searchBar.text];
-    
-    
-    
     //reload the imageView
+    
+    //We would need to check here as well! To see if any of the new images are favorited
+    [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    
 }
 
 @end
+
+
+
+

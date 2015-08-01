@@ -6,11 +6,29 @@
 //  Copyright (c) 2015 Jaehee Chung. All rights reserved.
 //
 
+
+
 #import <UIKit/UIKit.h>
+@protocol ImageCollectionViewCellDelegate;
 
 @interface ImageCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) id <ImageCollectionViewCellDelegate> delegate;
+
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
+@property (weak, nonatomic) IBOutlet UIButton *starImageView;
+
 
 
 @end
+
+@protocol ImageCollectionViewCellDelegate <NSObject>
+
+@optional
+
+-(UIImage *)imageCollectionViewCell:(ImageCollectionViewCell *)imageCollectionViewCell;
+
+
+@end
+
+

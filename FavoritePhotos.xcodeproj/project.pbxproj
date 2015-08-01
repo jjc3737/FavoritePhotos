@@ -16,6 +16,10 @@
 		3FF380971B6AD02900BC95F3 /* PhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF380961B6AD02900BC95F3 /* PhotosViewController.m */; };
 		3FF3809A1B6AD3BA00BC95F3 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF380991B6AD3BA00BC95F3 /* Model.m */; };
 		3FF3809E1B6AF0B800BC95F3 /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3809D1B6AF0B800BC95F3 /* ImageCollectionViewCell.m */; };
+		3FF380AA1B6BB6AA00BC95F3 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF380A91B6BB6AA00BC95F3 /* Image.m */; };
+		3FF380EB1B6C322500BC95F3 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF380EA1B6C322500BC95F3 /* FavoritesViewController.m */; };
+		3FF380EF1B6C49F400BC95F3 /* NSFileManager+Documents.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF380EE1B6C49F400BC95F3 /* NSFileManager+Documents.m */; };
+		3FF380F21B6C4B4B00BC95F3 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF380F11B6C4B4B00BC95F3 /* Favorites.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,14 @@
 		3FF380991B6AD3BA00BC95F3 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		3FF3809C1B6AF0B800BC95F3 /* ImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewCell.h; sourceTree = "<group>"; };
 		3FF3809D1B6AF0B800BC95F3 /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewCell.m; sourceTree = "<group>"; };
+		3FF380A81B6BB6AA00BC95F3 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		3FF380A91B6BB6AA00BC95F3 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		3FF380E91B6C322500BC95F3 /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
+		3FF380EA1B6C322500BC95F3 /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
+		3FF380ED1B6C49F400BC95F3 /* NSFileManager+Documents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Documents.h"; sourceTree = "<group>"; };
+		3FF380EE1B6C49F400BC95F3 /* NSFileManager+Documents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Documents.m"; sourceTree = "<group>"; };
+		3FF380F01B6C4B4B00BC95F3 /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
+		3FF380F11B6C4B4B00BC95F3 /* Favorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorites.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +101,8 @@
 			children = (
 				3FF380731B6ACFD800BC95F3 /* AppDelegate.h */,
 				3FF380741B6ACFD800BC95F3 /* AppDelegate.m */,
-				3FF380951B6AD02900BC95F3 /* PhotosViewController.h */,
-				3FF380961B6AD02900BC95F3 /* PhotosViewController.m */,
+				3FF380F31B6C791B00BC95F3 /* Categories */,
+				3FF380EC1B6C323200BC95F3 /* ViewControllers */,
 				3FF3809F1B6AF0BD00BC95F3 /* View */,
 				3FF3809B1B6AF08F00BC95F3 /* Model */,
 				3FF380791B6ACFD800BC95F3 /* Main.storyboard */,
@@ -132,6 +144,10 @@
 			children = (
 				3FF380981B6AD3BA00BC95F3 /* Model.h */,
 				3FF380991B6AD3BA00BC95F3 /* Model.m */,
+				3FF380A81B6BB6AA00BC95F3 /* Image.h */,
+				3FF380A91B6BB6AA00BC95F3 /* Image.m */,
+				3FF380F01B6C4B4B00BC95F3 /* Favorites.h */,
+				3FF380F11B6C4B4B00BC95F3 /* Favorites.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -143,6 +159,26 @@
 				3FF3809D1B6AF0B800BC95F3 /* ImageCollectionViewCell.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		3FF380EC1B6C323200BC95F3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3FF380951B6AD02900BC95F3 /* PhotosViewController.h */,
+				3FF380961B6AD02900BC95F3 /* PhotosViewController.m */,
+				3FF380E91B6C322500BC95F3 /* FavoritesViewController.h */,
+				3FF380EA1B6C322500BC95F3 /* FavoritesViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3FF380F31B6C791B00BC95F3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				3FF380ED1B6C49F400BC95F3 /* NSFileManager+Documents.h */,
+				3FF380EE1B6C49F400BC95F3 /* NSFileManager+Documents.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,7 +283,11 @@
 			files = (
 				3FF380751B6ACFD800BC95F3 /* AppDelegate.m in Sources */,
 				3FF380971B6AD02900BC95F3 /* PhotosViewController.m in Sources */,
+				3FF380EB1B6C322500BC95F3 /* FavoritesViewController.m in Sources */,
 				3FF3809E1B6AF0B800BC95F3 /* ImageCollectionViewCell.m in Sources */,
+				3FF380F21B6C4B4B00BC95F3 /* Favorites.m in Sources */,
+				3FF380AA1B6BB6AA00BC95F3 /* Image.m in Sources */,
+				3FF380EF1B6C49F400BC95F3 /* NSFileManager+Documents.m in Sources */,
 				3FF380721B6ACFD800BC95F3 /* main.m in Sources */,
 				3FF3809A1B6AD3BA00BC95F3 /* Model.m in Sources */,
 			);
@@ -446,6 +486,7 @@
 				3FF380911B6ACFD800BC95F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FF380921B6ACFD800BC95F3 /* Build configuration list for PBXNativeTarget "FavoritePhotosTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +495,7 @@
 				3FF380941B6ACFD800BC95F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
