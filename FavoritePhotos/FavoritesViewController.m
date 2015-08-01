@@ -81,7 +81,7 @@
     
     [self.collectionView reloadData];
     
-    return image.photo;
+    return [UIImage imageNamed:@"star-filled"];;
     
 }
 

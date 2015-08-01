@@ -34,6 +34,12 @@
     [self initializeThings];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self checkFavoritesArray];
+    [self.collectionView reloadData];
+    
+}
+
 
 -(void)initializeThings {
        self.favorites = [Favorites new];
@@ -140,6 +146,8 @@
             NSString *idOfCurrentImage = [self.images[j] idNumber];
             if ([idOfCurrentImage isEqualToString:idFavorited]) {
                 [self.images[j] setIsFavorited:YES];
+            } else {
+                [self.images[j] setIsFavorited:NO];
             }
         }
     }
