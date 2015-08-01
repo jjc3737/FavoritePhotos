@@ -29,6 +29,12 @@ NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
     
     if (self.idNumbersToCoordinates == nil) {
         self.idNumbersToCoordinates = [NSMutableDictionary new];
+        [self.idNumbersToCoordinates setObject:image.latitudeAndLongitude forKey:image.idNumber];
+        
+        //this writes to the directoryPath the images in separate files
+        [UIImageJPEGRepresentation(image.photo, 1.0) writeToFile:[self stringPathForImageFile:image.idNumber] options:NSAtomicWrite error:nil];
+        // this saves the ids of the images, and images are named idNumber.jpg so it is easy to find.
+        [self.idNumbersToCoordinates writeToURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]  atomically:YES];
     } else {
 
         
