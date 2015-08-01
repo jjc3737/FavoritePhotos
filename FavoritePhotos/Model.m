@@ -38,6 +38,10 @@
         Image *starImage = [Image new];
         starImage.isFavorited = NO;
         starImage.idNumber = dataDictionaries[@"id"];
+        //NSDictionary *locationDictionary = dataDictionaries[@"location"];
+        //starImage.latititude = [locationDictionary[@"latitude"]doubleValue];
+        //starImage.longitude = [locationDictionary[@"longitude"]doubleValue];
+
         NSDictionary *imageDictionary = dataDictionaries[@"images"];
         NSDictionary *standardResolution = imageDictionary[@"low_resolution"];
         NSURL *url = [NSURL URLWithString:standardResolution[@"url"]];
@@ -46,13 +50,8 @@
         i++;
         
     }
-    
 
-    
     [self.delegate Model:self images:images];
-    
-    
-    
 }
 
 

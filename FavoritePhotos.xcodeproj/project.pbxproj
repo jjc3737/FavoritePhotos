@@ -20,6 +20,8 @@
 		3FF380EB1B6C322500BC95F3 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF380EA1B6C322500BC95F3 /* FavoritesViewController.m */; };
 		3FF380EF1B6C49F400BC95F3 /* NSFileManager+Documents.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF380EE1B6C49F400BC95F3 /* NSFileManager+Documents.m */; };
 		3FF380F21B6C4B4B00BC95F3 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF380F11B6C4B4B00BC95F3 /* Favorites.m */; };
+		BB7667D91B6D2BF100A7BB2D /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7667D81B6D2BF100A7BB2D /* MapViewController.m */; };
+		BB7667DB1B6D2C6200A7BB2D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7667DA1B6D2C6200A7BB2D /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,9 @@
 		3FF380EE1B6C49F400BC95F3 /* NSFileManager+Documents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Documents.m"; sourceTree = "<group>"; };
 		3FF380F01B6C4B4B00BC95F3 /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
 		3FF380F11B6C4B4B00BC95F3 /* Favorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorites.m; sourceTree = "<group>"; };
+		BB7667D71B6D2BF100A7BB2D /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		BB7667D81B6D2BF100A7BB2D /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		BB7667DA1B6D2C6200A7BB2D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB7667DB1B6D2C6200A7BB2D /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +87,7 @@
 		3FF380631B6ACFD800BC95F3 = {
 			isa = PBXGroup;
 			children = (
+				BB7667DA1B6D2C6200A7BB2D /* MapKit.framework */,
 				3FF3806E1B6ACFD800BC95F3 /* FavoritePhotos */,
 				3FF380881B6ACFD800BC95F3 /* FavoritePhotosTests */,
 				3FF3806D1B6ACFD800BC95F3 /* Products */,
@@ -168,6 +175,8 @@
 				3FF380961B6AD02900BC95F3 /* PhotosViewController.m */,
 				3FF380E91B6C322500BC95F3 /* FavoritesViewController.h */,
 				3FF380EA1B6C322500BC95F3 /* FavoritesViewController.m */,
+				BB7667D71B6D2BF100A7BB2D /* MapViewController.h */,
+				BB7667D81B6D2BF100A7BB2D /* MapViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -288,6 +297,7 @@
 				3FF380F21B6C4B4B00BC95F3 /* Favorites.m in Sources */,
 				3FF380AA1B6BB6AA00BC95F3 /* Image.m in Sources */,
 				3FF380EF1B6C49F400BC95F3 /* NSFileManager+Documents.m in Sources */,
+				BB7667D91B6D2BF100A7BB2D /* MapViewController.m in Sources */,
 				3FF380721B6ACFD800BC95F3 /* main.m in Sources */,
 				3FF3809A1B6AD3BA00BC95F3 /* Model.m in Sources */,
 			);

@@ -28,7 +28,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+
+}
+
+-(void)viewWillAppear:(BOOL)animated {
     [self loadFromDirectory];
 }
 
@@ -48,12 +51,8 @@
     cell.delegate = self;
     
     Image *image = self.kindOfLikedPhotos [indexPath.item];
-    if (image.isFavorited) {
-        cell.starImageView.imageView.image = [UIImage imageNamed:@"star-filled"];
-    } else {
-        cell.starImageView.imageView.image = [UIImage imageNamed:@"star"];
-    }
     cell.cellImageView.image = image.photo;
+    cell.starImageView.imageView.image = [UIImage imageNamed:@"star-filled"];
     
     return cell;
 }

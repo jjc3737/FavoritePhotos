@@ -23,19 +23,19 @@ NSString *const directoryPath = @"favoritedImageJPEGs";
 NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
 
 -(void) saveWithImages:(NSMutableArray *)images {
-    self.idNumbers = [NSMutableArray new];
+
+    self.idNumbers = [[NSArray arrayWithContentsOfURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]]mutableCopy];
+
     for (Image *image in images) {
-        [self.idNumbers addObject:image.idNumber];
-        
-        //this writes to the directoryPath the images in separate files
-        
-        [UIImageJPEGRepresentation(image.photo, 1.0) writeToFile:[directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", image.idNumber, @"jpg"]] options:NSAtomicWrite error:nil];
-
+        if (![self.idNumbers containsObject:image.idNumber]) {
+            [self.idNumbers addObject:image.idNumber];
+            //this writes to the directoryPath the images in separate files
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            [UIImageJPEGRepresentation(image.photo, 1.0) writeToFile:[[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", image.idNumber, @"jpg"]] options:NSAtomicWrite error:nil];
+              // this saves the ids of the images, and images are named idNumber.jpg so it is easy to find.
+            [self.idNumbers writeToURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]  atomically:YES];
+        }
     }
-    
-    // this saves the ids of the images, and images are named idNumber.jpg so it is easy to find.
-
-    [self.idNumbers writeToURL:[[NSFileManager defaultManager] URLInDocumentsDirectoryForFileName:documentsDirectoryFileName]  atomically:YES];
 }
 
 -(NSMutableArray *)loadImageObjects{
@@ -57,9 +57,11 @@ NSString *const documentsDirectoryFileName = @"favoritePhotos.plist";
 }
 
 -(UIImage *) loadImage:(NSString *)fileName {
-    
-    UIImage * result = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@", directoryPath, fileName, @"jpg"]];
-    
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+    UIImage * result = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@", [paths objectAtIndex:0], fileName, @"jpg"]];
+
     return result;
 }
 @end

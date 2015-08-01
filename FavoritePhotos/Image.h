@@ -14,5 +14,7 @@
 @property BOOL isFavorited;
 @property UIImage *photo;
 @property NSString *idNumber;
+@property double latititude;
+@property double longitude;
 
 @end

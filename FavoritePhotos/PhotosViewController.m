@@ -37,7 +37,7 @@
 
 
 -(void)initializeThings {
-    self.favorites = [Favorites new];
+       self.favorites = [Favorites new];
        self.favoritedImages = [NSMutableArray new];
 }
 
@@ -107,8 +107,12 @@
 -(void)Model:(Model *)model images:(NSMutableArray *)images {
     self.images = [images copy];
     
-    
+
     //THing to do here: load the image Object array from Favorites. Iterate through them and match with list of self.images and see if any of the images are in this list. IF SO, then that ImageObject.isFavorited = YES;
+
+    [self checkFavoritesArray];
+
+
     
     [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 
@@ -120,11 +124,28 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.searchBar resignFirstResponder];
     [self.model fetchDataWithParameter:searchBar.text];
-    //reload the imageView
     
     //We would need to check here as well! To see if any of the new images are favorited
+
+    [self checkFavoritesArray];
+
+
     [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     
+}
+
+
+- (void)checkFavoritesArray {
+    Favorites *f = [Favorites new];
+    NSArray *favorites = [f loadImageObjects];
+
+    for (Image *i in favorites) {
+        for (int j = 0; j < self.images.count; j++) {
+            if ([self.images[j] isEqual:i]) {
+                [self.images[j] setIsFavorited:YES];
+            }
+        }
+    }
 }
 
 @end
