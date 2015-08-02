@@ -55,10 +55,14 @@
 
 #pragma mark - TabBarController Delegate
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
     
-    UINavigationController *navigationController = (UINavigationController *)viewController;
-    [navigationController.topViewController setValue:self.model forKey:@"model"];
-    self.model.delegate = (id<ModelDelegate>)navigationController.topViewController;
+        UINavigationController *navigationController = (UINavigationController *)viewController;
+        [navigationController.topViewController setValue:self.model forKey:@"model"];
+        self.model.delegate = (id<ModelDelegate>)navigationController.topViewController;
+    } else {
+        return;
+    }
     
 }
 
