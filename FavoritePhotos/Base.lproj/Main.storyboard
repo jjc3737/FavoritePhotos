@@ -118,7 +118,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="epy-6q-dxJ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="zzL-0z-roF"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="zzL-0z-roF">
+                            <connections>
+                                <action selector="favoritesSharingButtonPressed:" destination="mxj-mT-Ir8" id="5s2-VI-kum"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="5X5-ui-CW2" id="GZl-Oq-MWq"/>
@@ -215,11 +219,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gQV-3v-mCQ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="1sy-cF-l1w"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="1sy-cF-l1w">
+                            <connections>
+                                <action selector="searchShareButtonPressed:" destination="BYZ-38-t0r" id="p2A-dX-jlP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Oz9-nF-c9v" id="WwY-Cz-x5O"/>
                         <outlet property="searchBar" destination="Svt-EJ-121" id="rjn-Dz-WmH"/>
+                        <outlet property="searchShareButtonLabel" destination="1sy-cF-l1w" id="otx-if-Ztf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

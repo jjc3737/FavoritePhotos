@@ -85,6 +85,34 @@
     
 }
 
+#pragma mark - Sharing
+
+- (IBAction)favoritesSharingButtonPressed:(UIBarButtonItem *)sender {
+    
+    NSArray *arrayOfCells = [self.collectionView visibleCells];
+    ImageCollectionViewCell *cellOfInterest = arrayOfCells.firstObject;
+    
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cellOfInterest];
+    Image *image = self.kindOfLikedPhotos[indexPath.item];
+    
+    NSArray *sharedImage = [NSArray arrayWithObject:image.photo];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems: sharedImage applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
+
 
 
 @end

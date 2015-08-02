@@ -20,6 +20,7 @@
 @property NSMutableArray *images;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *starButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchShareButtonLabel;
 
 @end
 
@@ -32,6 +33,7 @@
     [super viewDidLoad];
     [self initModelAndSetUpDefault];
     [self initializeThings];
+     self.searchShareButtonLabel.enabled = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -63,11 +65,13 @@
     if (image.isFavorited) {
         image.isFavorited = NO;
 
+        self.searchShareButtonLabel.enabled = NO;
         [self.favorites savedRemovedFavoriteImage:image];
         return [UIImage imageNamed:@"star"];
     } else {
         image.isFavorited = YES;
 
+         self.searchShareButtonLabel.enabled = YES;
         [self.favorites saveWithImage:image];
         return [UIImage imageNamed:@"star-filled"];
     }
@@ -109,13 +113,8 @@
 -(void)Model:(Model *)model images:(NSMutableArray *)images {
     self.images = [images copy];
     
-
-    //THing to do here: load the image Object array from Favorites. Iterate through them and match with list of self.images and see if any of the images are in this list. IF SO, then that ImageObject.isFavorited = YES;
-
     [self checkFavoritesArray];
 
-
-    
     [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 
 }
@@ -139,19 +138,52 @@
 
 - (void)checkFavoritesArray {
     NSArray *favorites = [self.favorites loadImageObjects];
-
-    for (Image *i in favorites) {
-        NSString *idFavorited = i.idNumber;
-        for (int j = 0; j < self.images.count; j++) {
-            NSString *idOfCurrentImage = [self.images[j] idNumber];
-            if ([idOfCurrentImage isEqualToString:idFavorited]) {
-                [self.images[j] setIsFavorited:YES];
-            } else {
-                [self.images[j] setIsFavorited:NO];
+    
+    
+    for (Image *image in self.images) {
+        NSString *idOfCurrentImage = image.idNumber;
+        BOOL isInFavorites = NO;
+        for (Image *i in favorites) {
+            NSString *idFavorited = i.idNumber;
+            if ([idFavorited isEqualToString:idOfCurrentImage]) {
+                image.isFavorited = YES;
+                isInFavorites = YES;
             }
         }
+        if (!isInFavorites) {
+            image.isFavorited = NO;
+        }
     }
+
 }
+
+#pragma mark - Share Button
+
+- (IBAction)searchShareButtonPressed:(UIBarButtonItem *)sender {
+    
+    NSArray *arrayOfCells = [self.collectionView visibleCells];
+    ImageCollectionViewCell *cellOfInterest = arrayOfCells.firstObject;
+    
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cellOfInterest];
+    Image *image = self.images[indexPath.item];
+    
+    NSArray *sharedImage = [NSArray arrayWithObject:image.photo];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems: sharedImage applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
 
 @end
 
