@@ -12,18 +12,46 @@
 @implementation Model 
 
 
--(void)fetchDataWithParameter: (NSString *)parameter {
+-(void)fetchDataWithParameter: (NSString *)parameter searchType: (NSString *)searchType {
     
-    NSString *parameterWithOutSpaces = [parameter stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.instagram.com/v1/tags/%@/media/recent?access_token=269327096.f764bd0.b1491edd0bcf478883567100cf87449b", parameterWithOutSpaces]];
+    if ([searchType isEqualToString:@"hash"]) {
 
-    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *firstResults = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSArray *dataArray = firstResults[@"data"];
-        [self makeImagesWithArray:dataArray];
+    
+        NSString *parameterWithOutSpaces = [parameter stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.instagram.com/v1/tags/%@/media/recent?access_token=269327096.f764bd0.b1491edd0bcf478883567100cf87449b", parameterWithOutSpaces]];
+
+        [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSDictionary *firstResults = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSArray *dataArray = firstResults[@"data"];
+            [self makeImagesWithArray:dataArray];
+            
+        }]resume];
+    } else {
         
-    }]resume];
+        NSString *parameterWithOutSpaces = [parameter stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.instagram.com/v1/users/search?q=%@&access_token=269327096.f764bd0.b1491edd0bcf478883567100cf87449b", parameterWithOutSpaces]];
+        
+        //This request gets user from user search, so userID is obtained
+        [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSDictionary *firstResults = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSArray *userDataArray = firstResults[@"data"];
+            NSDictionary *targetUser = userDataArray.firstObject;
+            
+            NSURL *urlTwo = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent/?access_token=269327096.f764bd0.b1491edd0bcf478883567100cf87449b", targetUser[@"id"]]];
+            //Now we get the media recent from that user id.
+            [[[NSURLSession sharedSession] dataTaskWithURL:urlTwo completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                NSArray *dataArray = results[@"data"];
+                [self makeImagesWithArray:dataArray];
+                
+            }]resume];
+            
+   
+            
+        }]resume];
+    }
 }
+
 
 
 -(void)makeImagesWithArray: (NSArray *)dataArray {

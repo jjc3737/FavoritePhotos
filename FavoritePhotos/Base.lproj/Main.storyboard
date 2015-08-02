@@ -118,7 +118,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="epy-6q-dxJ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="zzL-0z-roF"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="zzL-0z-roF">
+                            <connections>
+                                <action selector="favoritesSharingButtonPressed:" destination="mxj-mT-Ir8" id="5s2-VI-kum"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="5X5-ui-CW2" id="GZl-Oq-MWq"/>
@@ -140,15 +144,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" misplaced="YES" placeholder="Search Instagram" translatesAutoresizingMaskIntoConstraints="NO" id="Svt-EJ-121">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                            <searchBar contentMode="redraw" placeholder="Search Instagram" translatesAutoresizingMaskIntoConstraints="NO" id="Svt-EJ-121">
+                                <rect key="frame" x="0.0" y="72" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="WyB-DH-P2m"/>
                                 </connections>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oz9-nF-c9v">
-                                <rect key="frame" x="0.0" y="72" width="600" height="479"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oz9-nF-c9v">
+                                <rect key="frame" x="0.0" y="116" width="600" height="435"/>
                                 <color key="backgroundColor" red="0.80808080810000005" green="0.80808080810000005" blue="0.80808080810000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="esk-Ph-aM8">
                                     <size key="itemSize" width="600" height="304"/>
@@ -215,11 +219,28 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gQV-3v-mCQ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="1sy-cF-l1w"/>
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="1sy-cF-l1w">
+                            <connections>
+                                <action selector="searchShareButtonPressed:" destination="BYZ-38-t0r" id="p2A-dX-jlP"/>
+                            </connections>
+                        </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="eix-s7-9Kr">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Hashtags"/>
+                                <segment title="Users"/>
+                            </segments>
+                            <connections>
+                                <action selector="hashtagsOrUsers:" destination="BYZ-38-t0r" eventType="valueChanged" id="35e-GL-dcA"/>
+                            </connections>
+                        </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Oz9-nF-c9v" id="WwY-Cz-x5O"/>
                         <outlet property="searchBar" destination="Svt-EJ-121" id="rjn-Dz-WmH"/>
+                        <outlet property="searchShareButtonLabel" destination="1sy-cF-l1w" id="otx-if-Ztf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

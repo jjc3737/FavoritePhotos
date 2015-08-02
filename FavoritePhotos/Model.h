@@ -18,7 +18,7 @@
 @property (weak,nonatomic) id <ModelDelegate> delegate;
 
 
--(void)fetchDataWithParameter: (NSString *)parameter;
+-(void)fetchDataWithParameter: (NSString *)parameter searchType: (NSString *)searchType;
 
 
 @end
