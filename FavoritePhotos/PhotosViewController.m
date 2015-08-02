@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *starButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *searchShareButtonLabel;
+@property BOOL isSearchingHash;
 
 @end
 
@@ -33,12 +34,13 @@
     [super viewDidLoad];
     [self initModelAndSetUpDefault];
     [self initializeThings];
-     self.searchShareButtonLabel.enabled = NO;
+   
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [self checkFavoritesArray];
     [self.collectionView reloadData];
+      self.searchShareButtonLabel.enabled = NO;
     
 }
 
@@ -49,9 +51,10 @@
 
 
 -(void)initModelAndSetUpDefault {
+    self.isSearchingHash = YES;
     self.model = [Model new];
     self.model.delegate = self;
-    [self.model fetchDataWithParameter:@"San Francisco"];
+    [self.model fetchDataWithParameter:@"San Francisco" searchType:@"hash"];
 }
 
 
@@ -124,7 +127,12 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.searchBar resignFirstResponder];
-    [self.model fetchDataWithParameter:searchBar.text];
+    
+    if (self.isSearchingHash) {
+        [self.model fetchDataWithParameter:searchBar.text searchType:@"hash"];
+    } else {
+        [self.model fetchDataWithParameter:searchBar.text searchType:@"users"];
+    }
     
     //We would need to check here as well! To see if any of the new images are favorited
 
@@ -182,6 +190,16 @@
     activityVC.excludedActivityTypes = excludeActivities;
     
     [self presentViewController:activityVC animated:YES completion:nil];
+}
+
+
+- (IBAction)hashtagsOrUsers:(UISegmentedControl *)sender {
+    
+    if (sender.selectedSegmentIndex == 0) {
+        self.isSearchingHash = YES;
+    } else {
+        self.isSearchingHash = NO;
+    }
 }
 
 
