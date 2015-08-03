@@ -119,6 +119,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="epy-6q-dxJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="zzL-0z-roF">
+                            <color key="tintColor" red="0.97979797980000005" green="0.97979797980000005" blue="0.97979797980000005" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="favoritesSharingButtonPressed:" destination="mxj-mT-Ir8" id="5s2-VI-kum"/>
                             </connections>
@@ -144,16 +145,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search Instagram" translatesAutoresizingMaskIntoConstraints="NO" id="Svt-EJ-121">
-                                <rect key="frame" x="0.0" y="72" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="WyB-DH-P2m"/>
-                                </connections>
-                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oz9-nF-c9v">
-                                <rect key="frame" x="0.0" y="116" width="600" height="435"/>
-                                <color key="backgroundColor" red="0.80808080810000005" green="0.80808080810000005" blue="0.80808080810000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <color key="backgroundColor" red="0.85561497330000003" green="0.85561497330000003" blue="0.85561497330000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="esk-Ph-aM8">
                                     <size key="itemSize" width="600" height="304"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -206,6 +200,14 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="0cT-PY-fMQ"/>
                                 </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" placeholder="Search Instagram" translatesAutoresizingMaskIntoConstraints="NO" id="Svt-EJ-121">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <color key="barTintColor" red="0.85561497330000003" green="0.85561497330000003" blue="0.85561497330000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="WyB-DH-P2m"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -213,7 +215,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Svt-EJ-121" secondAttribute="trailing" constant="-16" id="IhC-Ke-1hO"/>
                             <constraint firstItem="Oz9-nF-c9v" firstAttribute="top" secondItem="Svt-EJ-121" secondAttribute="bottom" id="S3A-3D-WXV"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Oz9-nF-c9v" secondAttribute="bottom" id="XYR-lA-vhG"/>
-                            <constraint firstItem="Svt-EJ-121" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Xxl-TK-JQF"/>
+                            <constraint firstItem="Svt-EJ-121" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Xxl-TK-JQF"/>
                             <constraint firstItem="Oz9-nF-c9v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fuR-rT-dp8"/>
                             <constraint firstItem="Svt-EJ-121" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="leW-8P-K8r"/>
                         </constraints>
@@ -221,6 +223,7 @@
                     <navigationItem key="navigationItem" id="gQV-3v-mCQ">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="1sy-cF-l1w">
+                            <color key="tintColor" red="0.97979797980000005" green="0.97979797980000005" blue="0.97979797980000005" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="searchShareButtonPressed:" destination="BYZ-38-t0r" id="p2A-dX-jlP"/>
                             </connections>
@@ -232,6 +235,7 @@
                                 <segment title="Hashtags"/>
                                 <segment title="Users"/>
                             </segments>
+                            <color key="tintColor" red="0.97979797980000005" green="0.97979797980000005" blue="0.97979797980000005" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="hashtagsOrUsers:" destination="BYZ-38-t0r" eventType="valueChanged" id="35e-GL-dcA"/>
                             </connections>
@@ -276,6 +280,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WoP-Ya-qmM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.35869307560000002" green="0.71676320959999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.97979797980000005" green="0.97979797980000005" blue="0.97979797980000005" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -295,6 +303,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="t1S-9e-5qA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.35869307560000002" green="0.71676320959999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
