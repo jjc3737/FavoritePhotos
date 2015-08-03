@@ -37,6 +37,7 @@
             MKPointAnnotation *annotation = [MKPointAnnotation new];
             annotation.coordinate = CLLocationCoordinate2DMake([coordinate[0]doubleValue], [coordinate[1]doubleValue]);
             annotation.title = @"Favorited Photo";
+            
             [self.mapView addAnnotation:annotation];
         }
     }
@@ -44,13 +45,16 @@
     [self.mapView showAnnotations:[self.mapView annotations] animated:YES];
 }
 
-//-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-//    MKAnnotationView *pin = [MKAnnotationView new];
-//    pin.canShowCallout = YES;
-//
-//    return pin;
-//    
-//}
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    MKAnnotationView *pin = [MKAnnotationView new];
+    pin.canShowCallout = YES;
+    
+    
+    pin.image = [UIImage imageNamed:@"Star Filled-50"];
+
+    return pin;
+    
+}
 
 
 @end
